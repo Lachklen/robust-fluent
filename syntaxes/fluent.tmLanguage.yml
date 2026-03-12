@@ -22,6 +22,8 @@ repository:
     contentName: string.fluent
     patterns:
       - include: "#attributes"
+      - include: "#ss14-rich-text-self-closing"
+      - include: "#ss14-rich-text-tag"
       - include: "#placeable"
 
   attributes:
@@ -33,6 +35,8 @@ repository:
       1:
         name: support.class.attribute-begin.fluent
     patterns:
+      - include: "#ss14-rich-text-self-closing"
+      - include: "#ss14-rich-text-tag"
       - include: "#placeable"
 
   placeable:
@@ -147,7 +151,17 @@ repository:
         name: support.function.selector-item.begin.fluent
     contentName: string.selector-item.content.fluent
     patterns:
+      - include: "#ss14-rich-text-self-closing"
+      - include: "#ss14-rich-text-tag"
       - include: "#placeable"
+
+  ss14-rich-text-tag:
+    name: entity.name.tag.ss14.fluent
+    match: '\[\/?(?:color|bold|italic|font|BubbleHeader|BubbleContent|Name|head)[^\]]*\]'
+
+  ss14-rich-text-self-closing:
+    name: entity.name.tag.ss14.self-closing.fluent
+    match: '\[scramble[^\]\/]*\/\]'
 
   wrong-line:
     match: >-

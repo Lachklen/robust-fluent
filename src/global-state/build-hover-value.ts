@@ -1,6 +1,7 @@
 import {
   PatternElement,
   Expression,
+  FunctionReference,
   MessageReference,
   TermReference,
   VariableReference,
@@ -33,6 +34,22 @@ const buildHoverValue = (patternElements: PatternElement[]) =>
         (element.expression as Expression).type === 'TermReference'
       ) {
         return `{ -${(element.expression as TermReference).id.name} }`
+      }
+
+      if (
+        element.type === 'Placeable' &&
+        (element.expression as Expression).type === 'FunctionReference'
+      ) {
+        const funcRef = element.expression as FunctionReference
+        const args = funcRef.arguments.positional
+          .map(arg => {
+            if (arg.type === 'VariableReference') return `$${(arg as VariableReference).id.name}`
+            if (arg.type === 'StringLiteral') return `"${arg.value}"`
+            if (arg.type === 'NumberLiteral') return arg.value
+            return '...'
+          })
+          .join(', ')
+        return `{ ${funcRef.id.name}(${args}) }`
       }
 
       if (

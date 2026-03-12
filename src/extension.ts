@@ -57,7 +57,7 @@ const activate = (_context: vscode.ExtensionContext) => {
   vscode.languages.registerDefinitionProvider('fluent', definitionProvider)
   vscode.languages.registerDocumentSymbolProvider('fluent', documentSymbolProvider)
   vscode.languages.registerHoverProvider('fluent', hoverProvider)
-  vscode.languages.registerCompletionItemProvider('fluent', completionProvider, '#')
+  vscode.languages.registerCompletionItemProvider('fluent', completionProvider, '#', '{', '[')
 }
 
 const deactivate = () => {
