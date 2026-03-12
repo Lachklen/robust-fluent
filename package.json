@@ -41,6 +41,12 @@
           "type": "array",
           "default": [],
           "description": "If you are working on a workspace with multiple projects, you will need to specify the root of each project so that Fluent files aren't mixed between projects"
+        },
+        "vscodeFluent.language": {
+          "type": "string",
+          "enum": ["auto", "en", "ru"],
+          "default": "auto",
+          "description": "Language for function hover documentation. 'auto' uses VS Code's display language. / Язык документации функций при наведении. 'auto' использует язык интерфейса VS Code."
         }
       }
     },
