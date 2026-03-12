@@ -131,8 +131,18 @@ class VsCodeFluentVisitor extends Visitor {
 
 const fluentParser = new FluentParser()
 
+const preprocessSource = (source: string): string => {
+  // Replace $variable in named arguments of term/function calls with "variable"
+  // e.g., -term(count: $remaining) -> -term(count: "remaining")
+  // This is needed because @fluent/syntax doesn't support $var as named argument values
+  return source.replace(
+    /(\w+:\s*)\$([a-zA-Z][a-zA-Z0-9_-]*)/g,
+    '$1"$2"'
+  )
+}
+
 const parser = (source: string) => {
-  const ast = fluentParser.parse(source)
+  const ast = fluentParser.parse(preprocessSource(source))
 
   const visitorMessage = new VsCodeFluentVisitor()
   visitorMessage.visit(ast)

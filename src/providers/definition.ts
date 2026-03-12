@@ -14,6 +14,25 @@ import { getIdentifierRangeAtPosition } from '../utils'
 
 const definitionProvider: DefinitionProvider = {
   provideDefinition(document, position) {
+    // Handle $variable references — find first occurrence as "definition"
+    const varRange = document.getWordRangeAtPosition(position, /\$[a-zA-Z][a-zA-Z0-9_-]*/)
+    if (varRange) {
+      const variableName = document.getText(varRange)
+      const text = document.getText()
+      const firstIndex = text.indexOf(variableName)
+      if (firstIndex >= 0) {
+        const start = document.positionAt(firstIndex)
+        const end = document.positionAt(firstIndex + variableName.length)
+        return [{
+          originSelectionRange: varRange,
+          targetUri: document.uri,
+          targetRange: new Range(start, end),
+          targetSelectionRange: new Range(start, end),
+        }]
+      }
+      return
+    }
+
     const originSelectionRange = getIdentifierRangeAtPosition(document, position)
     const identifier = document.getText(originSelectionRange)
 
