@@ -34,7 +34,7 @@
       "properties": {
         "vscodeFluent.replacementTemplate": {
           "type": "string",
-          "default": "t('$1')",
+          "default": "Loc.GetString(\"$1\")",
           "description": "Template used when extracting a string with the code action 'Extract to Fluent files'. Use $1 to get the message id."
         },
         "vscodeFluent.projects": {
