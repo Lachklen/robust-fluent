@@ -14,7 +14,7 @@
   "repository": {
     "comment": {
       "name": "comment.fluent",
-      "match": "^##?#?\\s.*$"
+      "match": "^##?#?(\\s.*)?$"
     },
     "message": {
       "begin": "^(-?[a-zA-Z][a-zA-Z0-9_-]*\\s*=\\s*)",
@@ -82,6 +82,9 @@
           "include": "#placeable-function"
         },
         {
+          "include": "#term-reference-with-arguments"
+        },
+        {
           "include": "#placeable-reference-or-number"
         },
         {
@@ -137,7 +140,7 @@
       "match": "\\$[a-zA-Z0-9_-]+"
     },
     "function-named-argument": {
-      "begin": "([a-zA-Z0-9]+:)\\s*([\"a-zA-Z0-9]+)",
+      "begin": "([a-zA-Z][a-zA-Z0-9_-]*:)\\s*(\\$?[\"a-zA-Z0-9_-]+)",
       "end": "(?=\\)|,|\\s)",
       "beginCaptures": {
         "1": {
@@ -213,6 +216,32 @@
     "ss14-rich-text-self-closing": {
       "name": "entity.name.tag.ss14.self-closing.fluent",
       "match": "\\[scramble[^\\]\\/]*\\/\\]"
+    },
+    "term-reference-with-arguments": {
+      "begin": "(-[a-zA-Z][a-zA-Z0-9_-]*\\()",
+      "end": "(\\))",
+      "beginCaptures": {
+        "1": {
+          "name": "support.function.term-reference-call.begin.fluent"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "support.function.term-reference-call.end.fluent"
+        }
+      },
+      "contentName": "string.term-reference-call.fluent",
+      "patterns": [
+        {
+          "include": "#function-comma"
+        },
+        {
+          "include": "#function-positional-argument"
+        },
+        {
+          "include": "#function-named-argument"
+        }
+      ]
     },
     "wrong-line": {
       "match": ".*",

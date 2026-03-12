@@ -7,6 +7,7 @@ import documentSymbolProvider from './providers/document-symbol'
 import hoverProvider from './providers/hover'
 import { fileNameEndsWithFtl } from './utils'
 import completionProvider from './providers/completion'
+import referenceProvider from './providers/reference'
 
 const activate = (_context: vscode.ExtensionContext) => {
   vscode.workspace.findFiles('**/*.ftl')
@@ -58,6 +59,7 @@ const activate = (_context: vscode.ExtensionContext) => {
   vscode.languages.registerDocumentSymbolProvider('fluent', documentSymbolProvider)
   vscode.languages.registerHoverProvider('fluent', hoverProvider)
   vscode.languages.registerCompletionItemProvider('fluent', completionProvider, '#', '{', '[')
+  vscode.languages.registerReferenceProvider('fluent', referenceProvider)
 }
 
 const deactivate = () => {
