@@ -26,7 +26,7 @@
   ],
   "main": "./out/src/extension.js",
   "activationEvents": [
-    "*"
+    "onLanguage:fluent"
   ],
   "contributes": {
     "configuration": {
