@@ -1,13 +1,13 @@
 {
-  "name": "vscode-fluent",
-  "displayName": "vscode-fluent",
-  "description": "VS Code extension to work with Fluent, the correct-by-design l10n programming language",
-  "version": "1.1.0",
-  "publisher": "macabeus",
+  "name": "vscode-robust-fluent",
+  "displayName": "vscode-robust-fluent",
+  "description": "VS Code extension to work with Fluent for Robust ToolBox Engine, the correct-by-design l10n programming language",
+  "version": "1.0.0",
+  "publisher": "myaflic",
   "icon": "assets/logo.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/macabeus/vscode-fluent.git"
+    "url": "https://github.com/Lachklen/robust-fluent#"
   },
   "scripts": {
     "build": "npm run build:syntaxes && npm run build:extension",
@@ -30,7 +30,7 @@
   ],
   "contributes": {
     "configuration": {
-      "title": "vscode-fluent",
+      "title": "vscode-robust-fluent",
       "properties": {
         "vscodeFluent.replacementTemplate": {
           "type": "string",
